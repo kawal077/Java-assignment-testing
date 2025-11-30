@@ -13,15 +13,30 @@ public interface LinkedListADT
 	 * Checks if the list is empty.
 	 * @return True if it is empty.
 	 */
+
+}
+ 
+	
+	
 	boolean isEmpty();
 
 	/**
 	 * Clears the list.
 	 */
+	
+	// Continued in SLL.java@Overridepublic boolean isEmpty() {
+    return head == null;
+}
+@Overridepublic int Size1() {
+    return this.size;
+}
+@Overridepublic void Clear1() {
+    this.head = null;
+    this.size = 0;
 	void clear();
 	
 	/**
-	 * Adds to the end of the list.
+	 * Adds to the end of the list.0
 	 * @param data Data to append.
 	 */
 	void append(Object data);
