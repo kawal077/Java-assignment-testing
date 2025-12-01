@@ -1,9 +1,8 @@
 package sait.sll.utility;
 
 /**
- * abstract data type for a linked 
- * 
- * @version 2025
+ * Abstract data type for a linked list.
+ * * @version 2025
  *
  * @param Object The reference data type the linked list will contain.
  */
@@ -13,30 +12,15 @@ public interface LinkedListADT
 	 * Checks if the list is empty.
 	 * @return True if it is empty.
 	 */
-
-}
- 
-	
-	
-	boolean isEmpty();
+	boolean isEmpty(); // Corrected method definition
 
 	/**
 	 * Clears the list.
 	 */
-	
-	// Continued in SLL.java@Overridepublic boolean isEmpty() {
-    return head == null;
-}
-@Overridepublic int Size1() {
-    return this.size;
-}
-@Overridepublic void Clear1() {
-    this.head = null;
-    this.size = 0;
-	void clear();
+	void clear(); // Corrected method definition
 	
 	/**
-	 * Adds to the end of the list.0
+	 * Adds to the end of the list.
 	 * @param data Data to append.
 	 */
 	void append(Object data);
@@ -67,7 +51,7 @@ public interface LinkedListADT
 	 * Gets the number of elements in the list.
 	 * @return Size of list (0 meaning empty)
 	 */
-	int size();
+	int size(); // Corrected method definition
 
 	/**
 	 * Removes element at index from list, reducing the size.
