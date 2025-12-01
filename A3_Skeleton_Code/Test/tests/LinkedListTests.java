@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
 import sait.sll.utility.*;
-
+import sait.sll.problemdomain.User; // <--- NEW REQUIRED IMPORT
 
 class LinkedListTests {
 	/**
@@ -61,6 +61,23 @@ class LinkedListTests {
 		assertEquals("c", this.linkedList.retrieve(2));
 		assertEquals("d", this.linkedList.retrieve(3));
 	}
+    
+    /**
+     * Tests appending a User object to the linked list (NEW TEST).
+     */
+    @Test
+    void testAppendUser() {
+        User user1 = new User(1, "Joe", "joe@mail.com", "pass1");
+        User user2 = new User(2, "Sue", "sue@mail.com", "pass2");
+        
+        this.linkedList.append(user1);
+        this.linkedList.append(user2);
+        
+        assertEquals(2, this.linkedList.size());
+        assertEquals(user1, this.linkedList.retrieve(0));
+        assertEquals(user2, this.linkedList.retrieve(1));
+    }
+
 
 	/**
 	 * Tests prepending nodes to linked list.
@@ -84,6 +101,22 @@ class LinkedListTests {
 		assertEquals("b", this.linkedList.retrieve(2));
 		assertEquals("a", this.linkedList.retrieve(3));
 	}
+    
+    /**
+     * Tests prepending a User object to the linked list (NEW TEST).
+     */
+    @Test
+    void testPrependUser() {
+        User user1 = new User(1, "Joe", "joe@mail.com", "pass1");
+        User user2 = new User(2, "Sue", "sue@mail.com", "pass2");
+        
+        this.linkedList.prepend(user1);
+        this.linkedList.prepend(user2);
+        
+        assertEquals(2, this.linkedList.size());
+        assertEquals(user2, this.linkedList.retrieve(0)); // Prepended last is first
+        assertEquals(user1, this.linkedList.retrieve(1));
+    }
 	
 	/**
 	 * Tests inserting node at valid middle index.
@@ -107,6 +140,24 @@ class LinkedListTests {
 		assertEquals("c", this.linkedList.retrieve(3)); 
 		assertEquals("d", this.linkedList.retrieve(4));
 	}
+    
+    /**
+     * Tests inserting a User object at a middle index (NEW TEST).
+     */
+    @Test
+    void testInsertUser() {
+        User user1 = new User(1, "Joe", "joe@mail.com", "pass1");
+        User user2 = new User(2, "Sue", "sue@mail.com", "pass2");
+        User user3 = new User(3, "Pat", "pat@mail.com", "pass3");
+
+        this.linkedList.append(user1); // 0
+        this.linkedList.append(user3); // 1
+        
+        this.linkedList.insert(user2, 1); // user1 -> [user2] -> user3
+        
+        assertEquals(3, this.linkedList.size());
+        assertEquals(user2, this.linkedList.retrieve(1)); 
+    }
 	
 	/**
 	 * Tests replacing existing nodes data.
@@ -129,6 +180,21 @@ class LinkedListTests {
 		assertEquals("e", this.linkedList.retrieve(2)); // Replaced node
 		assertEquals("d", this.linkedList.retrieve(3));
 	}
+    
+    /**
+     * Tests replacing an existing node with a User object (NEW TEST).
+     */
+    @Test
+    void testReplaceUser() {
+        this.linkedList.append("a"); // Placeholder
+        this.linkedList.append("b");
+        
+        User user1 = new User(1, "Joe", "joe@mail.com", "pass1");
+        this.linkedList.replace(user1, 0); // Replaces "a"
+        
+        assertEquals(2, this.linkedList.size());
+        assertEquals(user1, this.linkedList.retrieve(0));
+    }
 	
 	/**
 	 * Tests deleting node from linked list (middle).
@@ -150,6 +216,27 @@ class LinkedListTests {
 		assertEquals("b", this.linkedList.retrieve(1));
 		assertEquals("d", this.linkedList.retrieve(2)); // Node at new index 2
 	}
+    
+    /**
+     * Tests finding a User object by value and deleting it (NEW TEST).
+     * This checks both contains(Object) and remove(Object) logic, if implemented.
+     */
+    @Test
+    void testDeleteUser() {
+        User user1 = new User(1, "Joe", "joe@mail.com", "pass1");
+        User user2 = new User(2, "Sue", "sue@mail.com", "pass2");
+
+        this.linkedList.append(user1);
+        this.linkedList.append("b");
+        this.linkedList.append(user2);
+        
+        // Use delete(index) on the user object's index
+        int index = this.linkedList.indexOf(user1);
+        this.linkedList.delete(index); 
+        
+        assertEquals(2, this.linkedList.size());
+        assertFalse(this.linkedList.contains(user1));
+    }
 	
 	/**
 	 * Tests finding and retrieving node in linked list.
@@ -171,8 +258,54 @@ class LinkedListTests {
 		assertEquals("b", value);
 	}
 
+    /**
+     * Tests finding and retrieving a User object (NEW TEST).
+     */
+    @Test
+    void testFindUser() {
+        User user1 = new User(1, "Joe", "joe@mail.com", "pass1");
+        
+        this.linkedList.append("a");
+        this.linkedList.append(user1);
+        this.linkedList.append("c");
+        
+        assertTrue(this.linkedList.contains(user1));
+        assertEquals(1, this.linkedList.indexOf(user1));
+        assertEquals(user1, this.linkedList.retrieve(1));
+    }
+    
+    /**
+     * Tests inserting a generic Object at a middle index (NEW TEST).
+     */
+    @Test
+    void testInsertObject() {
+        this.linkedList.append(1);
+        this.linkedList.append(3);
+        
+        this.linkedList.insert(2, 1); // 1 -> [2] -> 3
+        
+        assertEquals(3, this.linkedList.size());
+        assertEquals(2, this.linkedList.retrieve(1));
+    }
+    
+    /**
+     * Tests deleting a generic Object (NEW TEST).
+     */
+    @Test
+    void testDeleteObject() {
+        this.linkedList.append(10);
+        this.linkedList.append(20);
+        this.linkedList.append(30);
+        
+        this.linkedList.delete(1); // 10 -> 30
+        
+        assertEquals(2, this.linkedList.size());
+        assertEquals(30, this.linkedList.retrieve(1));
+    }
+
+
 	// ------------------------------------------------------------------
-	// MEMBER 3: 5 ADDITIONAL UNIT TESTS
+	// MEMBER 3: 5 ORIGINAL ADDITIONAL UNIT TESTS (RETAINED)
 	// ------------------------------------------------------------------
 
 	/**
