@@ -1,11 +1,18 @@
 package sait.sll.problemdomain;
 
+import java.io.Serializable; // <--- ADD THIS IMPORT
+
 /**
  * Represents a user.
  * @version 2025
  *
  */
-public class User {
+// CHANGE THIS LINE: Add "implements Serializable"
+public class User implements Serializable { 
+	
+	// Add the serialVersionUID (good practice, though sometimes optional)
+	private static final long serialVersionUID = 1L; 
+	
 	private int id;
 	
 	private String name;

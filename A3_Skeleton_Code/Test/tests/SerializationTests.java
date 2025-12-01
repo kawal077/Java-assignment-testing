@@ -23,6 +23,7 @@ class SerializationTests {
 		this.oos = new ObjectOutputStream(this.baos);
 		
 		// Create your implemented linked list here and assign to the linkedList attribute.
+		this.users = new SLL();
 		
 		this.users.append(new User(1, "Joe Blow", "jblow@gmail.com", "password"));
 		this.users.append(new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", "abcdef"));

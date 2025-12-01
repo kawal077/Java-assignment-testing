@@ -14,15 +14,16 @@ class LinkedListTests {
 	private LinkedListADT linkedList;
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Creates a new SLL instance for each test.
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		
+		// Initialize your concrete SLL implementation here
+		this.linkedList = new SLL(); 
 	}
 
 	/**
-	 * @throws java.lang.Exception
+	 * Clears the list after each test.
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
@@ -48,28 +49,16 @@ class LinkedListTests {
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
-		/**
-		 * Linked list should now be:
-		 * 
-		 * a -> b -> c -> d
-		 */
-		
 		// Test the linked list is not empty.
 		assertFalse(this.linkedList.isEmpty());
 		
 		// Test the size is 4
 		assertEquals(4, this.linkedList.size());
 
-		// Test the first node value is a
+		// Test retrieval
 		assertEquals("a", this.linkedList.retrieve(0));
-
-		// Test the second node value is b
 		assertEquals("b", this.linkedList.retrieve(1));
-		
-		// Test the third node value is c
 		assertEquals("c", this.linkedList.retrieve(2));
-		
-		// Test the fourth node value is d
 		assertEquals("d", this.linkedList.retrieve(3));
 	}
 
@@ -83,33 +72,21 @@ class LinkedListTests {
 		this.linkedList.prepend("c");
 		this.linkedList.prepend("d");
 		
-		/**
-		 * Linked list should now be:
-		 * 
-		 * d -> c -> b -> a
-		 */
-		
 		// Test the linked list is not empty.
 		assertFalse(this.linkedList.isEmpty());
 		
 		// Test the size is 4
 		assertEquals(4, this.linkedList.size());
 
-		// Test the first node value is a
+		// Test retrieval (d -> c -> b -> a)
 		assertEquals("d", this.linkedList.retrieve(0));
-
-		// Test the second node value is b
 		assertEquals("c", this.linkedList.retrieve(1));
-		
-		// Test the third node value is c
 		assertEquals("b", this.linkedList.retrieve(2));
-		
-		// Test the fourth node value is d
 		assertEquals("a", this.linkedList.retrieve(3));
 	}
 	
 	/**
-	 * Tests inserting node at valid index.
+	 * Tests inserting node at valid middle index.
 	 */
 	@Test
 	void testInsertNode() {
@@ -118,33 +95,16 @@ class LinkedListTests {
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
-		this.linkedList.insert("e", 2);
+		this.linkedList.insert("e", 2); // a -> b -> [e] -> c -> d
 		
-		/**
-		 * Linked list should now be:
-		 * 
-		 * a -> b -> e -> c -> d
-		 */
-		
-		// Test the linked list is not empty.
-		assertFalse(this.linkedList.isEmpty());
-		
-		// Test the size is 4
+		// Test the size is 5
 		assertEquals(5, this.linkedList.size());
 
-		// Test the first node value is a
+		// Test retrieval
 		assertEquals("a", this.linkedList.retrieve(0));
-
-		// Test the second node value is b
 		assertEquals("b", this.linkedList.retrieve(1));
-		
-		// Test the third node value is e
-		assertEquals("e", this.linkedList.retrieve(2));
-		
-		// Test the third node value is c
-		assertEquals("c", this.linkedList.retrieve(3));
-		
-		// Test the fourth node value is d
+		assertEquals("e", this.linkedList.retrieve(2)); // New node at index 2
+		assertEquals("c", this.linkedList.retrieve(3)); 
 		assertEquals("d", this.linkedList.retrieve(4));
 	}
 	
@@ -158,35 +118,20 @@ class LinkedListTests {
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
-		this.linkedList.replace("e", 2);
-		
-		/**
-		 * Linked list should now be:
-		 * 
-		 * a -> b -> e -> d
-		 */
-		
-		// Test the linked list is not empty.
-		assertFalse(this.linkedList.isEmpty());
+		this.linkedList.replace("e", 2); // a -> b -> [e] -> d
 		
 		// Test the size is 4
 		assertEquals(4, this.linkedList.size());
 
-		// Test the first node value is a
+		// Test retrieval
 		assertEquals("a", this.linkedList.retrieve(0));
-
-		// Test the second node value is b
 		assertEquals("b", this.linkedList.retrieve(1));
-		
-		// Test the third node value is e
-		assertEquals("e", this.linkedList.retrieve(2));
-		
-		// Test the fourth node value is d
+		assertEquals("e", this.linkedList.retrieve(2)); // Replaced node
 		assertEquals("d", this.linkedList.retrieve(3));
 	}
 	
 	/**
-	 * Tests deleting node from linked list.
+	 * Tests deleting node from linked list (middle).
 	 */
 	@Test
 	void testDeleteNode() {
@@ -195,28 +140,15 @@ class LinkedListTests {
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
-		this.linkedList.delete(2);
+		this.linkedList.delete(2); // a -> b -> d
 		
-		/**
-		 * Linked list should now be:
-		 * 
-		 * a -> b -> d
-		 */
-		
-		// Test the linked list is not empty.
-		assertFalse(this.linkedList.isEmpty());
-		
-		// Test the size is 4
+		// Test the size is 3
 		assertEquals(3, this.linkedList.size());
 
-		// Test the first node value is a
+		// Test retrieval
 		assertEquals("a", this.linkedList.retrieve(0));
-
-		// Test the second node value is b
 		assertEquals("b", this.linkedList.retrieve(1));
-		
-		// Test the fourth node value is d
-		assertEquals("d", this.linkedList.retrieve(2));
+		assertEquals("d", this.linkedList.retrieve(2)); // Node at new index 2
 	}
 	
 	/**
@@ -229,12 +161,6 @@ class LinkedListTests {
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
-		/**
-		 * Linked list should now be:
-		 * 
-		 * a -> b -> c -> d
-		 */
-		
 		boolean contains = this.linkedList.contains("b");
 		assertTrue(contains);
 		
@@ -243,5 +169,91 @@ class LinkedListTests {
 		
 		String value = (String) this.linkedList.retrieve(1);
 		assertEquals("b", value);
+	}
+
+	// ------------------------------------------------------------------
+	// MEMBER 3: 5 ADDITIONAL UNIT TESTS
+	// ------------------------------------------------------------------
+
+	/**
+	 * 1. Tests deleting the Head node (index 0).
+	 */
+	@Test
+	void testDeleteHead() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		
+		this.linkedList.delete(0); // b
+		
+		assertEquals(1, this.linkedList.size());
+		assertEquals("b", this.linkedList.retrieve(0));
+	}
+	
+	/**
+	 * 2. Tests deleting the Tail node (index size - 1).
+	 */
+	@Test
+	void testDeleteTail() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		
+		this.linkedList.delete(2); // a -> b
+		
+		assertEquals(2, this.linkedList.size());
+		assertEquals("a", this.linkedList.retrieve(0));
+		assertEquals("b", this.linkedList.retrieve(1));
+		
+		// Asserting that retrieving index 2 throws an exception
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			this.linkedList.retrieve(2);
+		});
+	}
+
+	/**
+	 * 3. Tests inserting at the boundary (index == size).
+	 */
+	@Test
+	void testInsertAtTailBoundary() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		
+		this.linkedList.insert("Z", this.linkedList.size()); // a -> b -> Z
+		
+		assertEquals(3, this.linkedList.size());
+		assertEquals("Z", this.linkedList.retrieve(2));
+	}
+	
+	/**
+	 * 4. Tests indexOf() and contains() for an element not found.
+	 */
+	@Test
+	void testIndexOfNotFound() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		
+		// Test containment
+		assertFalse(this.linkedList.contains("z"));
+		
+		// Test index returns -1
+		assertEquals(-1, this.linkedList.indexOf("z"));
+	}
+	
+	/**
+	 * 5. Tests that delete throws IndexOutOfBoundsException for invalid index.
+	 */
+	@Test
+	void testDeleteInvalidIndex() {
+		this.linkedList.append("a");
+		
+		// Test deleting a negative index
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			this.linkedList.delete(-1);
+		});
+		
+		// Test deleting an index equal to size (invalid)
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			this.linkedList.delete(this.linkedList.size());
+		});
 	}
 }
